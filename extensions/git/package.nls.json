@@ -492,5 +492,8 @@
 			"Please make sure there is no space between the right bracket and left parenthesis:  ]( this is an internal syntax for links"
 		]
 	},
-	"view.workbench.learnMore": "To learn more about how to use Git and source control in VS Code [read our docs](https://aka.ms/vscode-scm)."
+	"view.workbench.learnMore": "To learn more about how to use Git and source control in VS Code [read our docs](https://aka.ms/vscode-scm).",
+	"command.desktop.open": "Open Git Desktop",
+	"view.desktop": "Git Desktop",
+	"config.desktop.enabled": "Replace the Source Control interface with the Git Desktop workspace. Reload the window after changing this setting."
 }

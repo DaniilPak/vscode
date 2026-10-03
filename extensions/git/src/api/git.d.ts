@@ -281,6 +281,8 @@ export interface Repository {
 	diffBetweenPatch(ref1: string, ref2: string, path?: string): Promise<string>;
 	diffBetweenWithStats(ref1: string, ref2: string, path?: string): Promise<DiffChange[]>;
 	diffBetweenWithStats2(ref: string, path?: string): Promise<DiffChange[]>;
+	/** Returns files changed by a commit against its first parent, including root commits. */
+	diffCommitWithStats(ref: string): Promise<DiffChange[]>;
 
 	hashObject(data: string): Promise<string>;
 

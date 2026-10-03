@@ -74,6 +74,12 @@
   "contributes": {
     "commands": [
       {
+        "command": "git.desktop.open",
+        "title": "%command.desktop.open%",
+        "category": "Git",
+        "icon": "$(open-preview)"
+      },
+      {
         "command": "git.continueInLocalClone",
         "title": "%command.continueInLocalClone%",
         "category": "Git",
@@ -3238,6 +3244,13 @@
           "command": "git.deleteWorktree2",
           "group": "worktrees@2"
         }
+      ],
+      "view/title": [
+        {
+          "command": "git.desktop.open",
+          "when": "view == git.desktop",
+          "group": "navigation"
+        }
       ]
     },
     "submenus": [
@@ -4154,6 +4167,12 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "%config.showReferenceDetails%"
+        },
+        "git.desktop.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "%config.desktop.enabled%"
         }
       }
     },
@@ -4386,7 +4405,18 @@
         "when": "config.git.enabled && git.state == initialized && scm.providerCount == 0",
         "group": "5_scm@10"
       }
-    ]
+    ],
+    "views": {
+      "scm": [
+        {
+          "id": "git.desktop",
+          "name": "%view.desktop%",
+          "type": "webview",
+          "when": "config.git.desktop.enabled",
+          "contextualTitle": "%view.desktop%"
+        }
+      ]
+    }
   },
   "dependencies": {
     "@joaomoreno/unique-names-generator": "^5.2.0",

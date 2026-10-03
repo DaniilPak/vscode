@@ -1251,6 +1251,11 @@ export class Repository implements Disposable {
 			this.repository.diffBetweenWithStats(`${ref1}...${ref2}`, { path, similarityThreshold }));
 	}
 
+	async diffCommitWithStats(ref: string): Promise<DiffChange[]> {
+		const commit = await this.getCommit(ref);
+		return this.diffTrees(commit.parents[0] ?? await this.getEmptyTree(), ref);
+	}
+
 	diffBetweenWithStats2(ref: string, path?: string): Promise<DiffChange[]> {
 		const scopedConfig = workspace.getConfiguration('git', Uri.file(this.root));
 		const similarityThreshold = scopedConfig.get<number>('similarityThreshold', 50);

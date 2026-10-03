@@ -303,6 +303,9 @@ export class StatusBarCommands {
 		if (this.repository.isHidden) {
 			return [];
 		}
+		if (workspace.getConfiguration('git').get<boolean>('desktop.enabled')) {
+			return [{ command: 'git.desktop.open', title: `$(git-branch) ${this.repository.headLabel}`, tooltip: l10n.t('Open Git Desktop'), arguments: [Uri.file(this.repository.root)] }];
+		}
 
 		return [this.checkoutStatusBar.command, this.syncStatusBar.command]
 			.filter((c): c is Command => !!c);

@@ -98,7 +98,7 @@ viewsRegistry.registerViews([{
 	canMoveView: true,
 	weight: 20,
 	order: 0,
-	when: ContextKeyExpr.and(ContextKeyExpr.has('scm.providerCount'), ContextKeyExpr.notEquals('scm.providerCount', 0)),
+	when: ContextKeyExpr.and(ContextKeyExpr.notEquals('config.git.desktop.enabled', true), ContextKeyExpr.has('scm.providerCount'), ContextKeyExpr.notEquals('scm.providerCount', 0)),
 	// readonly when = ContextKeyExpr.or(ContextKeyExpr.equals('config.scm.alwaysShowProviders', true), ContextKeyExpr.and(ContextKeyExpr.notEquals('scm.providerCount', 0), ContextKeyExpr.notEquals('scm.providerCount', 1)));
 	containerIcon: sourceControlViewIcon
 }], viewContainer);
@@ -109,6 +109,7 @@ viewsRegistry.registerViews([{
 	name: localize2('scmChanges', 'Changes'),
 	singleViewPaneContainerTitle: containerTitle,
 	ctorDescriptor: new SyncDescriptor(SCMViewPane),
+	when: ContextKeyExpr.notEquals('config.git.desktop.enabled', true),
 	canToggleVisibility: true,
 	canMoveView: true,
 	weight: 40,
@@ -139,6 +140,7 @@ viewsRegistry.registerViews([{
 	order: 2,
 	when: ContextKeyExpr.and(
 		ContextKeyExpr.has('scm.historyProviderCount'),
+		ContextKeyExpr.notEquals('config.git.desktop.enabled', true),
 		ContextKeyExpr.notEquals('scm.historyProviderCount', 0),
 	),
 	containerIcon: sourceControlViewIcon

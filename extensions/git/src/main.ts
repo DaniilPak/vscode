@@ -29,6 +29,7 @@ import { GitCommitInputBoxCodeActionsProvider, GitCommitInputBoxDiagnosticsManag
 import { GitBlameController } from './blame';
 import { CloneManager } from './cloneManager';
 import { getAskpassPaths } from './askpassManager';
+import { DesktopGit } from './desktopGit';
 
 const deactivateTasks: { (): Promise<void> }[] = [];
 
@@ -260,6 +261,15 @@ export async function activate(context: ExtensionContext): Promise<GitExtension>
 
 	const result = await _activate(context);
 	context.subscriptions.push(registerAPICommands(result));
+	let desktop: DesktopGit | undefined;
+	const registerDesktop = () => {
+		if (result.enabled && !desktop) {
+			desktop = new DesktopGit(context, result.getAPI(1));
+			context.subscriptions.push(desktop);
+		}
+	};
+	context.subscriptions.push(result.onDidChangeEnablement(() => queueMicrotask(registerDesktop)));
+	registerDesktop();
 	return result;
 }
 
